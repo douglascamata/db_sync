@@ -2,6 +2,7 @@
 
 import argparse
 import asyncio
+import logging
 from db_sync.utils.daemon import daemon
 from db_sync import setup_all
 from db_sync.merge import DatabaseMerger
@@ -14,7 +15,21 @@ class SyncDaemon(daemon):
         super().__init__(pidfile)
 
     def run(self):
+        self.setup_logging()
         main(polling_time)
+
+    def setup_logging(self):
+        logger = logging.getLogger('SyncDaemon')
+        logger.setLevel(logging.DEBUG)
+
+        fh = logging.FileHandler('/tmp/sync_daemon.log')
+        fh.setLevel(logging.DEBUG)
+
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+
 
 def main(polling_time):
     setup_all()

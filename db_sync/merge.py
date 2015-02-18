@@ -1,3 +1,4 @@
+import logging
 from db_sync.cassandra import setup_cassandra
 from db_sync.elastic_search import setup_elastic_search
 from db_sync.models import elastic_search, cassandra
@@ -7,15 +8,16 @@ from db_sync.diff import DatabaseDiff
 class DatabaseMerger:
 
     def merge(self, verbose=False):
+        logger = logging.getLogger('SyncDaemon')
         if verbose:
-            print("Merging databases...")
+            logger.debug("Merging databases...")
 
         self.database_diff = DatabaseDiff().diff()
         self._apply_cassandra_changes()
         self._apply_elastic_search_changes()
 
         if verbose:
-            print("Done.")
+            logger.debug("Done.")
 
     def _apply_cassandra_changes(self):
         self._apply_cassandra_creates()
