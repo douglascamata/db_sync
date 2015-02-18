@@ -1,6 +1,8 @@
 # Requirements
 
 - Python 3.4.x
+- ElasticSearch installed and running on default port
+- Cassandra installed and running on default port
 
 # Run instructions
 
