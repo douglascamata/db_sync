@@ -13,6 +13,7 @@ setup(name='db_sync',
           'nose2',
           'cqlengine',
           'unittest2',
-          'elasticsearch-dsl == 0.0.3'
+          'elasticsearch-dsl == 0.0.3',
+          'python-daemon'
       ],
       zip_safe=False)
