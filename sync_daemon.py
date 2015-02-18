@@ -59,11 +59,14 @@ if __name__ == '__main__':
     daemon = SyncDaemon(polling_time, '/tmp/sync_daemon.pid')
 
     if action == 'start':
+        print('Daemon started.')
+        print('Logging to /tmp/sync_daemon.log.')
         daemon.start()
     elif action == 'stop':
         daemon.stop()
+        print('Daemon stopped.')
     else:
-        pass
+        print('Unkown action.')
 
 
 
